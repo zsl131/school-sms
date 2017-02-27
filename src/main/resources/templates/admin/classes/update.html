@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="fragments/adminModel">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<script type="text/javascript" src="/basic/validate/bootstrapValidator.js"></script>
+	<title>修改班级</title>
+	<script type="text/javascript" src="/admin/bussness/classes.js"></script>
+</head>
+<body>
+<div th:fragment="content" th:remove="tag">
+	<div class="header lighter smaller blue">
+		<h3><i class="fa fa-plus"></i>&nbsp;修改班级（<span th:text="${classes.name}" th:remove="tag"></span>）</h3>
+		<div th:replace="admin/classes/nav :: content" th:remove="tag"></div>
+	</div>
+
+	<form method="POST" th:object="${classes}" id="dataForm">
+		<div class="form-group form-group-lg">
+			<div class="input-group">
+				<div class="input-group-addon">班级名称：</div>
+				<input name="name" type="text" class="form-control" th:value="${classes.name}" placeholder="请输入名称" />
+			</div>
+		</div>
+
+		<div class="form-group form-group-lg">
+			<div class="input-group">
+				<div class="input-group-addon">班主任：</div>
+				<div class="form-control">
+					<span th:each="tea : ${teaList}" th:remove="tag">
+						<button th:text="${tea.name}" th:class="'btn check-teacher ' +${classes.masterId eq tea.id ? 'btn-info':'btn-default'}" th:attr="teaId=${tea.id},name=${tea.name}, openid=${tea.openid}, phone=${tea.phone}" type="button"></button>
+					</span>
+				</div>
+			</div>
+		</div>
+		<input name="masterId" th:value="${classes.masterId}" type="hidden"/>
+		<input name="masterName" th:value="${classes.masterName}" type="hidden"/>
+		<input name="masterOpenid" th:value="${classes.masterOpenid}" type="hidden"/>
+		<input name="masterPhone" th:value="${classes.masterPhone}" type="hidden"/>
+
+		<input type="hidden" name="token" value="${session.token}"/>
+		<button type="submit" class="btn btn-primary">确定提交</button>
+		<button type="button" class="btn" onclick="history.back(-1)">取消返回</button>
+	</form>
+</div>
+</body>
+</html>

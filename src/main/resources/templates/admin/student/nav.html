@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <div th:fragment="content">
+            <div class="ace-settings-container" id="ace-settings-container">
+                <ul class="pagination">
+                    <li th:if="${#httpServletRequest.getParameter('claId') ne null}"><a class="auth" sn="AdminClassesController.show" th:href="'/admin/classes/show/'+${#httpServletRequest.getParameter('claId')}"><span class="fa fa-plus"></span> 批量操作学生</a></li>
+                    <li><a class="auth" sn="AdminStudentController.list" href="/admin/student/list"><span class="glyphicon glyphicon-th-list"></span> 学生列表</a></li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

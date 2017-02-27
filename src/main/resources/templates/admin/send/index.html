@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="fragments/adminModel">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>群发短信</title>
+		<link type="text/css" rel="stylesheet" href="/admin/bussness/send.css"/>
+		<script type="text/javascript" src="/admin/bussness/send.js"></script>
+		<script type="text/javascript" src="/jedate/jquery.jedate.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="/jedate/skin/jedate.css"/>
+	</head>
+<body>
+	<div th:fragment="content" th:remove="tag">
+		<div class="header lighter smaller blue">
+			<h3><span class="fa fa-envelope"></span>&nbsp;群发短信<strong>（余额：<span th:text="${surplus}" style="color:#F00; font-size:24px;"></span>）</strong></h3>
+			<div th:replace="admin/send/nav :: content" th:remove="tag"></div>
+		</div>
+
+		<div class="step-div">
+			<p class="line"></p>
+			<div class="single-step step-1 current-step">
+				<div class="number"><i class="fa fa-eye"></i></div>
+				<p>选择短信模板</p>
+			</div>
+			<div class="single-step step-2">
+				<div class="number"><i class="fa fa-database"></i></div>
+				<p>选择数据源</p>
+			</div>
+			<div class="single-step step-3">
+				<div class="number"><i class="fa fa-retweet"></i></div>
+				<p>替换模板变量</p>
+			</div>
+			<div class="single-step step-4">
+				<div class="number"><i class="fa fa-send"></i></div>
+				<p>群发短信</p>
+			</div>
+		</div>
+
+		<div class="arrow-div">
+			<div class="single-arrow arrow-1"><span class="arrow-up"></span></div>
+			<div class="single-arrow arrow-2"><span class="arrow-up arrow-hidden"></span></div>
+			<div class="single-arrow arrow-3"><span class="arrow-up arrow-hidden"></span></div>
+			<div class="single-arrow arrow-4"><span class="arrow-up arrow-hidden"></span></div>
+		</div>
+		<div class="send-content">
+			<div class="panel module-panel panel-1">
+				<div class="panel-heading"><i class="fa fa-eye"></i> 选择短信模板</div>
+				<div class="panel-body">
+					<button th:each="module : ${moduleList}" th:attr="moduleId=${module.id},moduleIid=${module.iid}" class="btn" th:text="'【'+${module.sign}+'】'+${module.content}"></button>
+				</div>
+			</div>
+
+			<div class="panel source-panel panel-2">
+				<div class="panel-heading"><i class="fa fa-database"></i> 选择数据源（二选一）</div>
+				<div class="panel-body">
+					<div class="single-source">
+						<p class="title"><i class="fa fa-file-excel-o"></i> 从Excel中导入</p>
+						<p class="remark">注意：Excel表格中第一行是标题，第二行必须是表头（表头的值不能为空且不能重复），从第三行开始才是真正的数据。
+						可<a href="/template/add-stu-template.xls" target="_blank">点击这里下载</a>仅供参数的空Excel模板
+
+						</p>
+						<p class="remark">
+							<input name="file" type="file" class="form-control" onchange="uploadFile(this)"/>
+							<span class="show-info">请选择Excel文件解析</span>
+						</p>
+						<div class="single-temp temp-1"></div>
+					</div>
+					<div class="single-source">
+						<p class="title"><i class="fa fa-database"></i> 从数据库中选择</p>
+						<p class="remark">注意：系统中为用户了一些可发短信的数据对象，用户可根据需要选择接收短信的数据对象</p>
+						<p class="remark">
+							<span class="show-info">点击这里从数据库中选择</span>
+						</p>
+						<div class="single-temp temp-2"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel value-panel panel-3">
+				<div class="panel-heading"><i class="fa fa-retweet"></i> 替换模板变量</div>
+				<div class="panel-body">
+					<p class="selected-module" style="color:#F00"></p>
+					<div class="params-div">
+					</div>
+				</div>
+			</div>
+
+			<div class="panel submit-panel panel-4">
+				<div class="panel-heading"><i class="fa fa-send"></i> 群发短信</div>
+				<div class="panel-body">
+					<input type="checkbox" class="form-control" id="task-check"/><label for="task-check" class="task-label">启用定时器</label>
+					<input type="text" id="task-time" readonly="readonly"/>
+					<div style="padding-top:10px; width:100%; float:left;">
+					<button class="btn btn-primary submit-btn" style="margin:0px; " type="button"><i class="fa fa-send"></i> 确认群发短信</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

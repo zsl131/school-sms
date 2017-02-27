@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="fragments/adminModel">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>老师列表</title>
+		<script type="text/javascript">
+			$(function() {
+				$(".delete-obj-href").deleteFun();
+			});
+		</script>
+	</head>
+<body>
+	<div th:fragment="content" th:remove="tag">
+		<div class="header lighter smaller blue">
+			<h3><span class="glyphicon glyphicon-th-list"></span>&nbsp;老师列表<small>（<span th:text="${datas.getTotalElements()}"></span>）</small></h3>
+			<div th:replace="admin/teacher/nav :: content" th:remove="tag"></div>
+		</div>
+
+        <div th:replace="admin/teacher/filter :: content" th:remove="tag"></div>
+
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>所在学校</th>
+						<th>姓名</th>
+						<th>联系方式</th>
+						<th>身份证号</th>
+						<th>OPENID</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="obj : ${datas}">
+						<td><a th:href="@{/admin/teacher/list(filter_schId='eq-'+${obj.schId})}" th:text="${obj.schName}"></a></td>
+						<td><span th:remove="tag" th:text="${obj.name}"></span><span th:if="${obj.sex ne ''}" th:remove="tag">[<b th:text="${obj.sex eq '1'?'男':'女'}" th:remove="tag"></b>]</span></td>
+						<td><span th:text="${phone}+'/'+${obj.email}"></span></td>
+						<td th:text="${obj.identity}"></td>
+						<td th:text="${obj.openid}"></td>
+						<td>
+							<div class="action-buttons">
+								<a class="green auth" sn="AdminTeacherController.update" title="修改" th:href="'/admin/teacher/update/'+${obj.id}">
+									<i class="fa fa-pencil"></i>
+								</a>
+
+								<a class="delete-obj-href red auth" sn="AdminTeacherController.delete" th:title="'此操作不可逆，确定删除【'+${obj.name}+'】吗？'" th:href="'/admin/teacher/delete/'+${obj.id}">
+									<i class="fa fa-remove"></i>
+								</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div th:include="fragments/page :: pager" th:remove="tag"></div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="fragments/adminModel">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<script type="text/javascript" src="/basic/validate/bootstrapValidator.js"></script>
+	<title>查看班级详情</title>
+	<script type="text/javascript" src="/admin/bussness/classes-show.js"></script>
+</head>
+<body>
+<div th:fragment="content" th:remove="tag">
+	<div class="header lighter smaller blue">
+		<h3><i class="fa fa-plus"></i>&nbsp;查看班级详情（<span th:text="${classes.name}" th:remove="tag"></span>）</h3>
+		<div th:replace="admin/classes/nav :: content" th:remove="tag"></div>
+	</div>
+
+	<form method="POST" th:object="${classes}" id="dataForm">
+		<div class="form-group form-group-lg">
+			<div class="input-group">
+				<div class="input-group-addon">班级名称：</div>
+				<div class="form-control" th:text="${classes.name}"></div>
+			</div>
+		</div>
+
+		<div class="form-group form-group-lg">
+			<div class="input-group">
+				<div class="input-group-addon">班主任：</div>
+				<div class="form-control" th:text="${classes.masterName}+'/'+${classes.masterPhone}"></div>
+			</div>
+		</div>
+
+		<div class="form-group form-group-lg">
+			<div class="input-group">
+				<div class="input-group-addon">导入学生：</div>
+				<div class="form-control">
+					<div class="btn-group" role="group">
+						<a href="/template/add-stu-template.xls" class="btn btn-info"><i class="fa fa-download"></i> 下载导入学生模板</a>
+						<button type="button" class="btn btn-primary upload-add-stu-btn" th:attr="claId=${classes.id}"><i class="fa fa-upload"></i> 上传要导入的学生数据</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group form-group-lg">
+			<div class="input-group">
+				<div class="input-group-addon">删除学生：</div>
+				<div class="form-control">
+					<div class="btn-group" role="group">
+						<a href="/template/remove-stu-template.xls" class="btn btn-info"><i class="fa fa-download"></i> 下载删除学生模板</a>
+						<button type="button" class="btn btn-danger upload-remove-stu-btn" th:attr="claId=${classes.id}"><i class="fa fa-upload"></i> 上传要删除的学生数据</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<button type="button" class="btn" onclick="history.back(-1)">取消返回</button>
+	</form>
+</div>
+</body>
+</html>

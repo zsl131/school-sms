@@ -1,0 +1,97 @@
+.step-div {
+    width:100%; float:left; margin-top:15px; position:relative;
+}
+
+.step-div p.line {
+    position:absolute; width:80%; border-bottom:5px #dfdfdf dotted; top:35px; left:10%;
+}
+
+.single-step {
+    width:25%; float:left; text-align:center;
+    position:relative; height:120px;
+}
+.step-4 {
+
+}
+
+.single-step .number {
+    width:70px; height:70px; border:1px #ddd solid; border-radius:70px; line-height:70px; text-align:center; font-size:34px;
+    color:#aaa; position:absolute; left:50%; margin-left:-35px; background:#fafafa;
+}
+.single-step p {
+    position:absolute; bottom:5px; text-align:center; width:100%; color:#aaa;
+    font-family:"微软雅黑";
+}
+
+.current-step .number {
+    color:#428bca; background:#e8f4ff; border:1px #428bca solid;
+}
+.current-step p {
+    color:#428bca; font-weight:bold;
+}
+
+.arrow-div {
+    float:left; width:100%; position:relative;
+}
+.arrow-div .single-arrow {
+    width:25%; float:left;text-align:center; position:relative; top:-23px;
+}
+
+.send-content {
+    border:1px #f3f3f3 solid; float:left; width:100%; margin-top:-6px; background:#f3f3f3; padding:12px;
+}
+
+.send-content .panel button {
+    margin:5px;
+}
+
+.single-source {
+    width:50%; text-align:center; float:left; padding:0px 15px 0px 13px; position:relative;
+}
+
+.single-source:first-child {
+    border-right:2px #dfdfdf dotted;
+}
+
+.single-source .title {
+    font-size:20px;font-family:"微软雅黑"
+}
+.single-source .remark {
+    text-align:left; color:#999;
+}
+.show-info {
+    padding-top:10px; color:#F00; width:100%; float:left;
+}
+
+.single-source .single-temp {
+    height:100%; position:absolute; width:97%; top:0px; left:5px;
+    background:#000; border-radius:5px;
+    filter:alpha(opacity=10); /*IE滤镜，透明度50%*/
+    -moz-opacity:0.1; /*Firefox私有，透明度50%*/
+    opacity:0.1;/*其他，透明度50%*/
+}
+
+
+.arrow-up {
+    width:0;
+    height:0;
+    border-left:20px solid transparent;
+    border-right:20px solid transparent;
+    border-bottom:20px solid #f3f3f3;
+}
+.arrow-hidden {
+    border-bottom:0px solid #FFF;
+}
+
+
+#task-check {
+    height:26px; width:26px; margin-left:5px;float:left;
+}
+.task-label {
+    line-height:36px; padding-left:5px; float:left;
+}
+
+#task-time {
+    float:left; width:160px; height:36px; line-height:36px; margin-left:8px; border-radius:5px; border:1px #ddd solid;
+    background: #fafafa; text-align:center; display:none;
+}
